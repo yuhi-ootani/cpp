@@ -1,5 +1,5 @@
 
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
 
 bool Contact::set_first_name(const std::string &s) {
     if (s.empty()) 
@@ -54,4 +54,13 @@ const std::string &Contact::get_phone_number() const {
 
 const std::string &Contact::get_darkest_secret() const {
     return darkest_secret;
+}
+
+void Contact::print_full_info() const {
+    std::cout << "First Name    : " << first_name   << "\n"
+                  << "Last Name     : " << last_name    << "\n"
+                  << "Nickname      : " << nickname    << "\n"
+                  << "Phone Number  : " << phone_number << "\n"
+                  << "Darkest Secret: " << darkest_secret << "\n";
+    
 }

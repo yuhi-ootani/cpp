@@ -8,8 +8,8 @@ CPP       := c++
 CPPFLAGS  := -Wall -Wextra -Werror -std=c++98
 
 # Source and object files (explicit — no wildcards)
-SRCS      := main.cpp
-OBJS      := phonenumber.o
+SRCS      := main.cpp Contact.cpp PhoneBook.cpp
+OBJS      := $(SRCS:.cpp=.o)
 
 # Clean utility
 RM        := rm -f
@@ -24,7 +24,7 @@ $(NAME): $(OBJS)
 	$(CPP) $(CPPFLAGS) -o $@ $(OBJS)
 
 # Compile each .cpp into its .o
-$(OBJS): $(SRCS)
+%.o: %.cpp
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 # Remove object files

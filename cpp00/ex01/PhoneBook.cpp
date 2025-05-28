@@ -1,5 +1,5 @@
 
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
 
 static void add_contact_error()
 {
@@ -67,10 +67,11 @@ void PhoneBook::display_contacts() const
         print_ten_chars(contacts[i].get_first_name());
         print_ten_chars(contacts[i].get_last_name());
         print_ten_chars(contacts[i].get_nickname());
+        std::cout << "\n";
     }
 }
 
-void 
+
 
 
 void PhoneBook::search_contact() const 
@@ -87,6 +88,8 @@ void PhoneBook::search_contact() const
         std::cout << "Invalid index." << std::endl;
         return;
     }
-    print_full_contact(contacts[index]);
+    //ignore as many characters as possible
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+   contacts[idx].printFull();
 
 }

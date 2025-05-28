@@ -24,7 +24,7 @@ $(NAME): $(OBJS)
 	$(CPP) $(CPPFLAGS) -o $@ $(OBJS)
 
 # Compile each .cpp into its .o
-$(OBJS): $(SRCS)
+%.o: %.cpp
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 # Remove object files

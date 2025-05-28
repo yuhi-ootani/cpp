@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include "contact.hpp"
+#include "Contact.hpp"
 
 class PhoneBook {
   private:

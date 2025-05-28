@@ -1,5 +1,5 @@
 
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
 
 int main() {
   std::string input;
@@ -15,11 +15,12 @@ int main() {
     } 
     else if (input == "SEARCH") {
       std::cout << "Searching for contacts..." << std::endl;
-      // Here you would typically call a method to search for contacts
-
-    } else if (input == "EXIT") {
+      phoneBook.search_contact();
+    } 
+    else if (input == "EXIT")
+    {
       std::cout << "Exiting the PhoneBook application. Goodbye!" << std::endl;
-      break;  // Exit the loop and terminate the program
+      break;  
     } else {
       std::cout << "Invalid command. Please try again." << std::endl;
     }
