@@ -1,17 +1,17 @@
 
 
 # Executable name
-NAME      := Zombie
+NAME      := ex03
 
 # Compiler settings
 CPP       := c++
-CPPFLAGS  := -Wall -Wextra -Werror -std=c++98
+CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 
 
 # Source and object files (explicit — no wildcards)
 SRCS      := main.cpp \
-			 newZombie.cpp \
-			 randomChump.cpp \
-			 Zombie.cpp
+			HumanA.cpp \
+			HumanB.cpp \
+			Weapon.cpp
 OBJS      := $(SRCS:.cpp=.o)
 
 # Clean utility

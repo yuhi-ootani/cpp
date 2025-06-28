@@ -1,17 +1,14 @@
 
 
 # Executable name
-NAME      := Zombie
+NAME      := brain
 
 # Compiler settings
 CPP       := c++
-CPPFLAGS  := -Wall -Wextra -Werror -std=c++98
+CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 
 
 # Source and object files (explicit — no wildcards)
-SRCS      := main.cpp \
-			 newZombie.cpp \
-			 randomChump.cpp \
-			 Zombie.cpp
+SRCS      := main.cpp 
 OBJS      := $(SRCS:.cpp=.o)
 
 # Clean utility
