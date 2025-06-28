@@ -1,7 +1,7 @@
 
 
 # Executable name
-NAME      := phonenumber
+NAME      := phonebook
 
 # Compiler settings
 CPP       := c++
