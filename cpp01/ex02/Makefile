@@ -1,7 +1,7 @@
 
 
 # Executable name
-NAME      := brain
+NAME      := ex02
 
 # Compiler settings
 CPP       := c++

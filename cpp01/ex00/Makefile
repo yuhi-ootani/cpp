@@ -1,7 +1,7 @@
 
 
 # Executable name
-NAME      := Zombie
+NAME      := ex00
 
 # Compiler settings
 CPP       := c++

@@ -1,11 +1,11 @@
 
 
 # Executable name
-NAME      := ZombieHorde
+NAME      := ex01
 
 # Compiler settings
 CPP       := c++
-CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 -g
+CPPFLAGS  := -Wall -Wextra -Werror -std=c++98
 
 # Source and object files (explicit — no wildcards)
 SRCS      := main.cpp \

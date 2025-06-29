@@ -2,10 +2,17 @@
 #include "Zombie.hpp"
 
 int main() {
-    Zombie *horde = zombieHorde(5, "ZombieHorde");
-    for (int i = 0; i < 5; ++i) {
+    const int N = 5;
+    Zombie *horde = zombieHorde(N, "ZombieHorde");
+    if (!horde) {
+        std::cerr << "Failed to allocate a zombie horde of size " << N << "\n";
+        return 1;
+    }
+
+    for (int i = 0; i < N; ++i) {
         horde[i].announce();
     }
+
     delete[] horde;
     horde = NULL;
     return 0;

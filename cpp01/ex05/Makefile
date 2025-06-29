@@ -1,14 +1,15 @@
 
 
 # Executable name
-NAME      := ex04
+NAME      := ex05
 
 # Compiler settings
 CPP       := c++
 CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 
 
 # Source and object files (explicit — no wildcards)
-SRCS      := main.cpp 
+SRCS      := main.cpp \
+			 Harl.cpp
 OBJS      := $(SRCS:.cpp=.o)
 
 # Clean utility

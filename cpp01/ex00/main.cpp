@@ -2,11 +2,13 @@
 #include "Zombie.hpp"
 
 int main() {
-    Zombie *zombie = newZombie("Zombie1");
-    zombie->announce();
+    Zombie one("Bob");
+    Zombie two("Lee");
+    Zombie *three = newZombie("Jon");
 
-    randomChump("Zombie2");
-
-    delete zombie;
-    return 0;
+    three->announce();
+    two.announce();
+    randomChump("Sam");
+    one.announce();
+    delete three;
 }
