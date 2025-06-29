@@ -1,7 +1,7 @@
 
 #include "Zombie.hpp"
 
-Zombie::Zombie(std::string name) : _name("Unnamed") {}
+Zombie::Zombie(void) : _name("Unnamed") {}
 
 Zombie::Zombie(std::string name) : _name(name) {}
 

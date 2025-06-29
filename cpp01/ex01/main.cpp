@@ -2,7 +2,7 @@
 #include "Zombie.hpp"
 
 int main() {
-    const int N = 5;
+    const int N = 6;
     Zombie *horde = zombieHorde(N, "ZombieHorde");
     if (!horde) {
         std::cerr << "Failed to allocate a zombie horde of size " << N << "\n";
