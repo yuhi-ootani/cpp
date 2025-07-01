@@ -46,3 +46,6 @@ std::ostream &operator<<(std::ostream &os, const Fixed &f) {
     os << f.toFloat();
     return os;
 }
+
+
+//ex02

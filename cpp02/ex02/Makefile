@@ -1,7 +1,7 @@
 
 
 # Executable name
-NAME      := ex01
+NAME      := ex02
 
 # Compiler settings
 CPP       := c++
