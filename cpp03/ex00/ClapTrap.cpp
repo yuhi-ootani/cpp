@@ -1,15 +1,19 @@
 
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap() : _name("Unnamed"), _hit_points(10), _energy_points(10), _attack_damage(0) {
+    std::cout << "ClapTrap " << _name << " constructed (default constructor)!\n";
+}
+
 ClapTrap::ClapTrap(const std::string &name)
     : _name(name), _hit_points(10), _energy_points(10), _attack_damage(0) {
-    std::cout << "ClapTrap " << name << " is constructed." << std::endl;
-};
+    std::cout << "ClapTrap " << name << " constructed." << std::endl;
+}
 
 ClapTrap::ClapTrap(const ClapTrap &other) {
     std::cout << "Copy constructor is called.\n";
     *this = other;
-};
+}
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
     std::cout << "Copy assignment operator is called.\n";
@@ -20,7 +24,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
         _attack_damage = other._attack_damage;
     }
     return *this;
-};
+}
 
 ClapTrap::~ClapTrap() { std::cout << "Destructor is called.\n"; };
 
@@ -32,7 +36,7 @@ void ClapTrap::attack(const std::string &target) {
     _energy_points--;
     std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _attack_damage
               << " points of damage!\n";
-};
+}
 
 void ClapTrap::takeDamage(unsigned int amount) {
     if (_hit_points <= 0) {
@@ -45,9 +49,9 @@ void ClapTrap::takeDamage(unsigned int amount) {
     } else {
         _hit_points -= amount;
     }
-    std::cout << "ClapTrap " << _name << " takes " << amount << " points of damage! (" << _hit_points
-              << " HP remaining)\n";
-};
+    std::cout << "ClapTrap " << _name << " takes " << amount << " points of damage! ("
+              << _hit_points << " HP remaining)\n";
+}
 
 void ClapTrap::beRepaired(unsigned int amount) {
     if (_hit_points <= 0 || _energy_points <= 0) {
@@ -58,4 +62,4 @@ void ClapTrap::beRepaired(unsigned int amount) {
     _hit_points += amount;
     std::cout << "ClapTrap " << _name << " repairs " << amount << " points of HP! (" << _hit_points
               << " HP remaining)\n";
-};
+}
