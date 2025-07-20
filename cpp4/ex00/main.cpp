@@ -51,12 +51,17 @@ int main() {
     Animal *mix = new Animal();
     mix->makeSound();
     delete mix;
+    std::cout << "\n";
+
     mix = new Cat();
     mix->makeSound();
     delete mix;
+    std::cout << "\n";
+
     mix = new Dog();
     mix->makeSound();
     delete mix;
+    std::cout << "\n";
 
     std::cout << "\n=== copy tests ===\n";
     Animal a_orig;
