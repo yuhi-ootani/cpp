@@ -16,11 +16,11 @@ ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name) {
 }
 
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other) {
-    std::cout << "ScavTrap's Copy constructor is called.\n";
+    std::cout << "ScavTrap Copy constructor called.\n";
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
-    std::cout << "ScavTrap's Copy assignment operator is called.\n";
+    std::cout << "ScavTrap assignment operator called.\n";
     if (this != &other) {
         ClapTrap::operator=(other);
     }
@@ -42,9 +42,9 @@ void ScavTrap::attack(const std::string &target) {
 
 void ScavTrap::guardGate() {
     if (_hit_points <= 0) {
-        std::cout << _name << " doesn't have enough points to guard.\n";
+        std::cout << "ScavTrap " << _name << " doesn't have enough points to guard.\n";
         return;
     }
 
-    std::cout << "ScavTrap is now in Gate keeper mode.\n";
+    std::cout << "ScavTrap " << _name << " is now in Gate keeper mode.\n";
 }

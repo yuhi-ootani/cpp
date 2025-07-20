@@ -18,4 +18,4 @@ Brain &Brain::operator=(const Brain &other) {
     return *this;
 }
 
-Brain::~Brain() { std::cout << "Brain deconstructed.\n"; }
+Brain::~Brain() { std::cout << "Brain destructed.\n"; }

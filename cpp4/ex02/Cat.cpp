@@ -15,13 +15,13 @@ Cat &Cat::operator=(const Cat &other) {
         Animal::operator=(other);
         *_brain = *other._brain;
     }
-    std::cout << "Cat copy‑assignment called, new type = " << _type << std::endl;
+    std::cout << "Cat copy‑assignment called, new type = " << other._type << std::endl;
     return *this;
 }
 
 Cat::~Cat() {
     delete _brain;
-    std::cout << "Cat of type \"" << _type << "\" deconstructed.\n";
+    std::cout << "Cat of type \"" << _type << "\" destroyed.\n";
 }
 
 void Cat::makeSound() const { std::cout << _type << " says: Meow! Meow!\n"; }

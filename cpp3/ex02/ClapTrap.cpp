@@ -11,12 +11,12 @@ ClapTrap::ClapTrap(const std::string &name)
 }
 
 ClapTrap::ClapTrap(const ClapTrap &other) {
-    std::cout << "ClapTrap's Copy constructor is called.\n";
+    std::cout << "ClapTrap Copy constructor called.\n";
     *this = other;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
-    std::cout << "ClapTrap's Copy assignment operator is called.\n";
+    std::cout << "ClapTrap Copy assignment operator called.\n";
     if (this != &other) {
         _name = other._name;
         _hit_points = other._hit_points;

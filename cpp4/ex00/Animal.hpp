@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 
+// if there is not virtual member function,
+// You don't need to add virtual to the destructor
 class Animal {
   protected:
     std::string _type;
@@ -14,7 +16,9 @@ class Animal {
     Animal();
     Animal(const Animal &other);
     Animal &operator=(const Animal &other);
-    ~Animal();
+    virtual ~Animal();
+
+    // member function
     virtual void makeSound() const;
     std::string getType() const;
 };

@@ -16,11 +16,11 @@ ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name) {
 }
 
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other) {
-    std::cout << "ScavTrap's Copy constructor is called.\n";
+    std::cout << "ScavTrap's Copy constructor called.\n";
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
-    std::cout << "ScavTrap's Copy assignment operator is called.\n";
+    std::cout << "ScavTrap assignment operator called.\n";
     if (this != &other) {
         ClapTrap::operator=(other);
     }

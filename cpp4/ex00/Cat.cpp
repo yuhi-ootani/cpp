@@ -14,10 +14,10 @@ Cat &Cat::operator=(const Cat &other) {
     if (this != &other) {
         Animal::operator=(other);
     }
-    std::cout << "Cat copy‑assignment called, new type = " << _type << std::endl;
+    std::cout << "Cat copy‑assignment called, new type = " << other._type << std::endl;
     return *this;
 }
 
-Cat::~Cat() { std::cout << "Cat of type \"" << _type << "\" deconstructed.\n"; }
+Cat::~Cat() { std::cout << "Cat of type \"" << _type << "\" destroyed.\n"; }
 
 void Cat::makeSound() const { std::cout << _type << " says: Meow! Meow!\n"; }

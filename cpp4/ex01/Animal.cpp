@@ -12,11 +12,11 @@ Animal::Animal(const Animal &other) : _type(other._type) {
 Animal &Animal::operator=(const Animal &other) {
     if (this != &other)
         this->_type = other._type;
-    std::cout << "Animal copy‑assignment called, new type = " << _type << std::endl;
+    std::cout << "Animal copy‑assignment called, new type = " << other._type << std::endl;
     return *this;
 }
 
-Animal::~Animal() { std::cout << "Animal of type \"" << _type << "\" deconstructed.\n"; }
+Animal::~Animal() { std::cout << "Animal of type \"" << _type << "\" destroyed.\n"; }
 
 void Animal::makeSound() const { std::cout << _type << " makes a sound.\n"; }
 

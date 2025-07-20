@@ -14,10 +14,10 @@ Dog &Dog::operator=(const Dog &other) {
     if (this != &other) {
         Animal::operator=(other);
     }
-    std::cout << "Dog copy‑assignment called, new type = " << _type << std::endl;
+    std::cout << "Dog copy‑assignment called, new type = " << other._type << std::endl;
     return *this;
 }
 
-Dog::~Dog() { std::cout << "Dog of type \"" << _type << "\" deconstructed.\n"; }
+Dog::~Dog() { std::cout << "Dog of type \"" << _type << "\" destroyed.\n"; }
 
 void Dog::makeSound() const { std::cout << _type << " says: Woof! Woof!\n"; }
