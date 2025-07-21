@@ -1,15 +1,16 @@
 
 
 # Executable name
-NAME      := ex00
+NAME      := ex01
 
 # Compiler settings
 CPP       := c++
-CPPFLAGS  := -Wall -Wextra -Werror -std=c++98
+CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 -pedantic
 
 # Source and object files (explicit — no wildcards)
 SRCS      := main.cpp \
-			Bureaucrat.cpp
+			Bureaucrat.cpp \
+			Form.cpp
 
 OBJS      := $(SRCS:.cpp=.o)
 

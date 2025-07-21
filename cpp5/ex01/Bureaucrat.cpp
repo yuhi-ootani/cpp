@@ -1,5 +1,6 @@
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Tarou"), _grade(150) {
     std::cout << "default(Tarou, 150) Bureaucrat constructor called\n";
@@ -20,7 +21,6 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name), _grade(oth
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
     if (this != &other) {
-        // this->_name = other._name;
         this->_grade = other._grade;
     }
     std::cout << other._name << " Bureaucrat assigment operator called\n";
@@ -60,4 +60,15 @@ const char *Bureaucrat::GradeTooLowException::what() const throw() {
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &b) {
     os << b.getName() << ", bureaucrat grade " << b.getGrade();
     return os;
+}
+
+// ================= ex01 ======================= //
+void Bureaucrat::signForm(Form &form) {
+    try {
+        form.beSigned(*this);
+        std::cout << _name << " signed " << form.getName() << "\n";
+    } catch (const std::exception &e) {
+        std::cout << _name << " couldn’t sign " << form.getName() << " because " << e.what()
+                  << "\n";
+    }
 }

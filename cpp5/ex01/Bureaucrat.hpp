@@ -6,6 +6,9 @@
 #include <iostream>
 #include <string>
 
+// 前方宣言 Forward-declaring
+class Form;
+
 class Bureaucrat {
 
   private:
@@ -34,6 +37,9 @@ class Bureaucrat {
       public:
         virtual const char *what() const throw();
     };
+
+    // ex01
+    void signForm(Form &form);
 };
 
 // overload
