@@ -5,7 +5,7 @@
 
 // OrthodoxCanonical AForm
 PresidentialPardonForm::PresidentialPardonForm()
-    : AForm("presidential pardon", 25, 5), _target("undefined") {
+    : AForm("Presidential pardon", 25, 5), _target("undefined") {
     std::cout << _target << " : " << this->getName()
               << " default(unnamed) Form constructor called.\n";
 }
@@ -32,7 +32,7 @@ PresidentialPardonForm::~PresidentialPardonForm() {
 
 // paramator constructor
 PresidentialPardonForm::PresidentialPardonForm(const std::string target)
-    : AForm("presidential pardon", 25, 5), _target(target) {
+    : AForm("Presidential pardon", 25, 5), _target(target) {
     std::cout << _target << ": " << this->getName() << " Form constructor called\n";
 }
 

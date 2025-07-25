@@ -4,7 +4,7 @@
 
 // OrthodoxCanonical AForm
 ShrubberyCreationForm::ShrubberyCreationForm()
-    : AForm("shrubbery creation", 145, 137), _target("undefined") {
+    : AForm("Shrubbery creation", 145, 137), _target("undefined") {
     std::cout << _target << " : " << this->getName()
               << " default(unnamed) Form constructor called.\n";
 }
@@ -31,7 +31,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 
 // paramator constructor
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string target)
-    : AForm("shrubbery creation", 145, 137), _target(target) {
+    : AForm("Shrubbery creation", 145, 137), _target(target) {
     std::cout << _target << " : " << this->getName() << " Form constructor called\n";
 }
 

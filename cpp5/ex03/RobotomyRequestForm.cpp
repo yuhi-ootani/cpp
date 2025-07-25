@@ -5,7 +5,7 @@
 
 // OrthodoxCanonical AForm
 RobotomyRequestForm::RobotomyRequestForm()
-    : AForm("robotomy request", 72, 45), _target("undefined") {
+    : AForm("Robotomy request", 72, 45), _target("undefined") {
     std::cout << _target << " : " << this->getName()
               << " default(unnamed) Form constructor called.\n";
 }
@@ -32,7 +32,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 
 // paramator constructor
 RobotomyRequestForm::RobotomyRequestForm(const std::string target)
-    : AForm("robotomy request", 72, 45), _target(target) {
+    : AForm("Robotomy request", 72, 45), _target(target) {
     std::cout << _target << ": " << this->getName() << " Form constructor called\n";
 }
 

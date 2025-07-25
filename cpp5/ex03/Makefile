@@ -1,11 +1,11 @@
 
 
 # Executable name
-NAME      := ex02
+NAME      := ex03
 
 # Compiler settings
 CPP       := c++
-CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 -pedantic
+CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 -pedantic -g -O0
 
 # Source and object files (explicit — no wildcards)
 SRCS      := main.cpp \
@@ -13,7 +13,8 @@ SRCS      := main.cpp \
 			AForm.cpp \
 			ShrubberyCreationForm.cpp \
 			RobotomyRequestForm.cpp \
-			PresidentialPardonForm.cpp
+			PresidentialPardonForm.cpp \
+			Intern.cpp
 
 
 OBJS      := $(SRCS:.cpp=.o)
