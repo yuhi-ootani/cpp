@@ -5,7 +5,7 @@ NAME      := ex03
 
 # Compiler settings
 CPP       := c++
-CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 -pedantic -g -O0
+CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 
 
 # Source and object files (explicit — no wildcards)
 SRCS      := main.cpp \
