@@ -1,20 +1,19 @@
 
 
 # Executable name
-NAME      := ex00
+NAME      := convert
 
 # Compiler settings
 CPP       := c++
-CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 
+CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 -g -pedantic
 
 # Source and object files (explicit — no wildcards)
 SRCS      := main.cpp \
-			Bureaucrat.cpp \
-			AForm.cpp \
-			ShrubberyCreationForm.cpp \
-			RobotomyRequestForm.cpp \
-			PresidentialPardonForm.cpp \
-			Intern.cpp
+			ScalarConverter.cpp \
+			convert.cpp \
+			detect.cpp \
+			print.cpp \
+			pseudo.cpp
 
 
 OBJS      := $(SRCS:.cpp=.o)
