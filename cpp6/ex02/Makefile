@@ -1,7 +1,7 @@
 
 
 # Executable name
-NAME      := convert
+NAME      := identifier
 
 # Compiler settings
 CPP       := c++
@@ -9,11 +9,8 @@ CPPFLAGS  := -Wall -Wextra -Werror -std=c++98
 
 # Source and object files (explicit — no wildcards)
 SRCS      := main.cpp \
-			ScalarConverter.cpp \
-			convert.cpp \
-			detect.cpp \
-			print.cpp \
-			pseudo.cpp
+			baseABC.cpp \
+
 
 
 OBJS      := $(SRCS:.cpp=.o)

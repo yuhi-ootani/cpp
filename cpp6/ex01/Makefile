@@ -1,7 +1,7 @@
 
 
 # Executable name
-NAME      := convert
+NAME      := serializer
 
 # Compiler settings
 CPP       := c++
@@ -9,11 +9,7 @@ CPPFLAGS  := -Wall -Wextra -Werror -std=c++98
 
 # Source and object files (explicit — no wildcards)
 SRCS      := main.cpp \
-			ScalarConverter.cpp \
-			convert.cpp \
-			detect.cpp \
-			print.cpp \
-			pseudo.cpp
+			Serializer.cpp
 
 
 OBJS      := $(SRCS:.cpp=.o)
