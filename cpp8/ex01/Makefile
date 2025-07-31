@@ -5,10 +5,11 @@ NAME      := ex01
 
 # Compiler settings
 CPP       := c++
-CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 
+CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 -pedantic
 
 # Source and object files (explicit — no wildcards)
-SRCS      := main.cpp 
+SRCS      := main.cpp \
+			Span.cpp
 
 
 OBJS      := $(SRCS:.cpp=.o)

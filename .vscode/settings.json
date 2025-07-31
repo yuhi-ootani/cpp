@@ -83,6 +83,7 @@
     "ratio": "cpp",
     "stack": "cpp",
     "variant": "cpp",
-    "*.tpp": "cpp"
+    "*.tpp": "cpp",
+    "list": "cpp"
   }
 }
