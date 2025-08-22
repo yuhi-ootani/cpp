@@ -17,23 +17,27 @@ static void print_char(const char &c, const int &i) {
         std::cout << "char:   " << c << "\n";
 }
 
-void print_result(const char &c, const int &i, const float &f, const double &d) {
+// fixed: Don’t use scientific. Always print in normal decimal.
+// std::setprecision(N): Changes how many digits are printed after the decimal point.
 
+void print_result(const char &c, const int &i, const float &f, const double &d) {
     // char
     print_char(c, i);
 
     // int
     std::cout << "int:    " << i << "\n";
 
-    // float
-    if (std::floor(f) == f)
-        std::cout << "float:  " << f << ".0f\n";
-    else
-        std::cout << "float:  " << f << "f\n";
+    // float: 7 significant digits
+    {
+        std::ostringstream oss;
+        oss << std::setprecision(7) << f; // no fixed!
+        std::cout << "float:  " << oss.str() << "f\n";
+    }
 
-    // double
-    if (std::floor(d) == d)
-        std::cout << "double: " << d << ".0\n";
-    else
-        std::cout << "double: " << d << "\n";
+    // double: 16 significant digits
+    {
+        std::ostringstream oss;
+        oss << std::setprecision(16) << d; // no fixed!
+        std::cout << "double: " << oss.str() << "\n";
+    }
 }
