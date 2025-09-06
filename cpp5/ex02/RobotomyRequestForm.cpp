@@ -6,13 +6,13 @@
 // OrthodoxCanonical AForm
 RobotomyRequestForm::RobotomyRequestForm()
     : AForm("robotomy request", 72, 45), _target("undefined") {
-    std::cout << _target << " : " << this->getName()
+    std::cout << _target << ": " << this->getName()
               << " default(unnamed) Form constructor called.\n";
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
     : AForm(other), _target(other._target) {
-    std::cout << _target << " : " << this->getName() << " Form copy-constructor called\n";
+    std::cout << _target << ": " << this->getName() << " Form copy-constructor called\n";
 }
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &other) {
@@ -20,14 +20,14 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &o
         AForm::operator=(other);
         _target = other._target;
     }
-    std::cout << _target << " : "
+    std::cout << _target << ": "
               << "Form assigment operator called. " << other.getName()
               << "'s signed status and target were only copied.💀\n";
     return *this;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm() {
-    std::cout << _target << " : " << this->getName() << " Form destructor called (derived).\n";
+    std::cout << _target << ": " << this->getName() << " Form destructor called (derived).\n";
 }
 
 // paramator constructor

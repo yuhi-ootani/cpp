@@ -42,15 +42,13 @@ int main(void) {
     }
 
     std::cout << "\n=======  Form doesn't exit =======\n";
-    CreatedForm = student.makeForm("nonexistent", "target");
-    if (CreatedForm) {
-        try {
-            CreatedForm->beSigned(Trump);
-            CreatedForm->execute(Trump);
-        } catch (std::exception &e) {
-            std::cout << e.what() << "\n";
-        }
+    try {
+        CreatedForm = student.makeForm("nonexistent", "target");
+        CreatedForm->beSigned(Trump);
+        CreatedForm->execute(Trump);
         delete CreatedForm;
+    } catch (std::exception &e) {
+        std::cout << e.what() << "\n";
     }
 
     std::cout << "\n=======  fin =======\n";

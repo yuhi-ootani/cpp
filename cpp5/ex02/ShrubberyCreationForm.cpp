@@ -5,13 +5,13 @@
 // OrthodoxCanonical AForm
 ShrubberyCreationForm::ShrubberyCreationForm()
     : AForm("shrubbery creation", 145, 137), _target("undefined") {
-    std::cout << _target << " : " << this->getName()
+    std::cout << _target << ": " << this->getName()
               << " default(unnamed) Form constructor called.\n";
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
     : AForm(other), _target(other._target) {
-    std::cout << _target << " : " << this->getName() << " Form copy-constructor called\n";
+    std::cout << _target << ": " << this->getName() << " Form copy-constructor called\n";
 }
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other) {
@@ -19,20 +19,20 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
         AForm::operator=(other);
         _target = other._target;
     }
-    std::cout << _target << " : "
+    std::cout << _target << ": "
               << "Form assigment operator called. " << other.getName()
               << "'s signed status and target were only copied.💀\n";
     return *this;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {
-    std::cout << _target << " : " << this->getName() << " Form destructor called (derived).\n";
+    std::cout << _target << ": " << this->getName() << " Form destructor called (derived).\n";
 }
 
 // paramator constructor
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string target)
     : AForm("shrubbery creation", 145, 137), _target(target) {
-    std::cout << _target << " : " << this->getName() << " Form constructor called\n";
+    std::cout << _target << ": " << this->getName() << " Form constructor called\n";
 }
 
 // pure virtual function

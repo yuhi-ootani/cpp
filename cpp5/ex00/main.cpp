@@ -39,10 +39,12 @@ int main() {
     // 3) Normal gradeUp / gradeDown
     std::cout << "\n-- gradeUp from 2 → 1 --\n";
     try {
-        Bureaucrat alice("Alice", 2);
+        Bureaucrat alice("Alice", 3);
         std::cout << alice << "\n";
         alice.gradeUp();
-        std::cout << alice << std::endl;
+        std::cout << alice << "\n";
+        alice.gradeUp();
+        std::cout << alice << "\n";
     } catch (const std::exception &e) {
         std::cerr << "Error: " << e.what() << "\n";
     }

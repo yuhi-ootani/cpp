@@ -6,13 +6,13 @@
 // OrthodoxCanonical AForm
 PresidentialPardonForm::PresidentialPardonForm()
     : AForm("presidential pardon", 25, 5), _target("undefined") {
-    std::cout << _target << " : " << this->getName()
+    std::cout << _target << ": " << this->getName()
               << " default(unnamed) Form constructor called.\n";
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other)
     : AForm(other), _target(other._target) {
-    std::cout << _target << " : " << this->getName() << " Form copy-constructor called\n";
+    std::cout << _target << ": " << this->getName() << " Form copy-constructor called\n";
 }
 
 PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &other) {
@@ -20,14 +20,14 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPard
         AForm::operator=(other);
         _target = other._target;
     }
-    std::cout << _target << " : "
+    std::cout << _target << ": "
               << "Form assigment operator called. " << other.getName()
               << "'s signed status and target were only copied.💀\n";
     return *this;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm() {
-    std::cout << _target << " : " << this->getName() << " Form destructor called (derived).\n";
+    std::cout << _target << ": " << this->getName() << " Form destructor called (derived).\n";
 }
 
 // paramator constructor

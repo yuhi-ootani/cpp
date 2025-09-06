@@ -40,6 +40,10 @@ AForm *Intern::makeForm(const std::string &name, const std::string target) const
             return Intern::FormTable[i].FormCreator(target);
         }
     }
-    std::cout << "Intern: Form " << name << " doesn't exits.\n";
+    throw FormNotFoundException();
     return NULL;
+}
+
+const char *Intern::FormNotFoundException::what() const throw() {
+    return "Form creation failed: no such form exists!!";
 }

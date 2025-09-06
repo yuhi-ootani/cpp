@@ -79,5 +79,5 @@ void AForm::execute(Bureaucrat const &executor) const {
 }
 
 const char *AForm::NotSignedException::what() const throw() {
-    return "AFORM: The form is not signed yet.";
+    return "The form is not signed yet!!";
 }
