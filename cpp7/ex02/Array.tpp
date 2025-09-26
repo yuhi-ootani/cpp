@@ -8,15 +8,18 @@ template <typename T>
 // Array<T>
 // No <T> on Array → the compiler won’t connect your definition to the Array template.
 // because Array by itself isn’t a concrete type
-Array<T>::Array() : _size(0), _array(new T[0]()) {
+Array<T>::Array() : _size(0), _array(NULL) {
     std::cout << "default constructor called\n";
 }
 
-template <typename T> Array<T>::Array(unsigned int n) : _size(n), _array(new T[n]()) {
+template <typename T>
+
+Array<T>::Array(unsigned int n) : _size(n), _array(new T[n]()) {
     std::cout << "constructor called\n";
 }
 
 template <typename T>
+
 Array<T>::Array(const Array &other) : _size(other.size()), _array(new T[_size]) {
     std::cout << "copy constructor called\n";
     for (unsigned int i = 0; i < _size; i++) {
@@ -24,7 +27,9 @@ Array<T>::Array(const Array &other) : _size(other.size()), _array(new T[_size]) 
     }
 }
 
-template <typename T> Array<T> &Array<T>::operator=(const Array<T> &other) {
+template <typename T>
+
+Array<T> &Array<T>::operator=(const Array<T> &other) {
     if (this != &other) {
         _size = other._size;
         delete[] _array;
@@ -36,22 +41,32 @@ template <typename T> Array<T> &Array<T>::operator=(const Array<T> &other) {
     return *this;
 }
 
-template <typename T> Array<T>::~Array() {
+template <typename T>
+
+Array<T>::~Array() {
     std::cout << "destructor called\n";
     delete[] _array;
 }
 
-template <typename T> unsigned int Array<T>::size() const { return _size; }
+template <typename T>
+
+unsigned int Array<T>::size() const {
+    return _size;
+}
 
 // std::out_of_range
 // if you use it, you can catch the specific exeception!
-template <typename T> T &Array<T>::operator[](unsigned int idx) {
+template <typename T>
+
+T &Array<T>::operator[](unsigned int idx) {
     if (idx >= _size)
         throw std::out_of_range("Index out of range");
     return _array[idx];
 }
 
-template <typename T> const T &Array<T>::operator[](unsigned int idx) const {
+template <typename T>
+
+const T &Array<T>::operator[](unsigned int idx) const {
     if (idx >= _size)
         throw std::out_of_range("Index out of range");
     return _array[idx];

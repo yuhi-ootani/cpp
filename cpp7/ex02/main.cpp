@@ -3,6 +3,8 @@
 #include "Array.hpp"
 
 int main(void) {
+    int *a = new int();
+    std::cout << "\n === a is " << *a << " ===\n";
 
     std::cout << "\n === empty array === \n";
     Array<int> empty;
@@ -26,6 +28,7 @@ int main(void) {
 
     std::cout << "\n === copy array & const array === \n";
     const Array<int> copy(arr);
+    std::cout << "=== deep copy: change the original array (arr[0] = 43) === \n";
     arr[0] = 43;
     // error
     // copy[0] = 55;

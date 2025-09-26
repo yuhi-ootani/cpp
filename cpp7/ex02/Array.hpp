@@ -2,14 +2,16 @@
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
 
-#include <stdexcept> // for out_of_range
 #include <iostream>
+#include <stdexcept> // for out_of_range
 #include <string>
-#include <typeinfo>
+
 
 //  a class only becomes a class template
 // if you put a template<…> header in front of its declaration.
-template <typename T> class Array {
+template <typename T>
+
+class Array {
   private:
     unsigned int _size;
     T *_array;
