@@ -5,6 +5,7 @@
 int main(void) {
     int *a = new int();
     std::cout << "\n === a is " << *a << " ===\n";
+    delete a;
 
     std::cout << "\n === empty array === \n";
     Array<int> empty;
@@ -30,9 +31,6 @@ int main(void) {
     const Array<int> copy(arr);
     std::cout << "=== deep copy: change the original array (arr[0] = 43) === \n";
     arr[0] = 43;
-    // error
-    // copy[0] = 55;
-    // copy = arr;
 
     try {
         std::cout << copy[0] << "\n";
