@@ -8,8 +8,6 @@ Span::Span() : _limit(0), _v() {
 }
 
 Span::Span(unsigned long N) : _limit(N), _v() {
-    // std::cout << N << " " << static_cast<unsigned long>(std::numeric_limits<unsigned int>::max())
-    //           << "\n";
     if (N < 0 || N > static_cast<unsigned long>(std::numeric_limits<unsigned int>::max()))
         throw std::out_of_range("Span size out of valid range!!");
     _v.reserve(_limit);
@@ -35,6 +33,20 @@ void Span::addNumber(int value) {
         throw std::out_of_range("container is full!!");
     }
     _v.push_back(value);
+}
+
+void Span::addNumber(int from, int to) {
+    if (from > to)
+        std::swap(from, to);
+
+    unsigned int count = to - from + 1;
+
+    if (_v.size() + count > _limit)
+        throw std::out_of_range("too many elements!!");
+
+    _v.reserve(_v.size() + count);
+    Iota gen(from);
+    std::generate_n(std::back_inserter(_v), count, gen);
 }
 
 unsigned int Span::shortestSpan() {
@@ -66,29 +78,6 @@ unsigned int Span::longestSpan() {
     std::sort(tmp.begin(), tmp.end());
     max = static_cast<unsigned int>(tmp[tmp.size() - 1] - tmp[0]);
     return max;
-}
-
-void Span::addNumber(int first, int last) {
-    // if (first > last)
-    //     std::swap(first, last);
-    // int newElements = last - first + 1;
-    size_t newElements = static_cast<size_t>(abs(last - first) + 1);
-    if (_v.size() + newElements > _limit)
-        throw std::out_of_range("too many elements!!");
-    // std::vector<int> tmp;
-    // tmp.reserve(newElements);
-    // for (int x = first; x <= last; ++x)
-    //     tmp.push_back(x);
-
-    // one-shot insert at the end
-    _v.insert(_v.end(), tmp.begin(), tmp.end());
-}
-
-template <typename InputIt> void Span::addNumber(InputIt first, InputIt last) {
-    size_t cnt = std::distance(first, last);
-    if (_v.size() + cnt > _limit)
-        throw std::out_of_range("…");
-    _v.insert(_v.end(), first, last); // C++98 range-insert
 }
 
 void Span::printVector() {

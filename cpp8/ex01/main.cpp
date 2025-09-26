@@ -18,7 +18,7 @@ int main() {
 
     std::cout << "\n === range of iterators test === \n";
     {
-        Span sp = Span(100000);
+        Span sp = Span(1000000);
         sp.addNumber(1, 100000);
         std::cout << "shortest " << sp.shortestSpan() << std::endl;
         std::cout << "longest " << sp.longestSpan() << std::endl;

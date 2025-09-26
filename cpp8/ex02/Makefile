@@ -1,15 +1,14 @@
 
 
 # Executable name
-NAME      := ex01
+NAME      := ex02
 
 # Compiler settings
 CPP       := c++
 CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 -pedantic
 
 # Source and object files (explicit — no wildcards)
-SRCS      := main.cpp \
-			Span.cpp
+SRCS      := main.cpp 
 
 
 OBJS      := $(SRCS:.cpp=.o)

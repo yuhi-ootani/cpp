@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <iterator>
 #include <limits>
 #include <stdexcept>
 #include <vector>
@@ -13,6 +14,12 @@ class Span {
     unsigned int _limit;
     std::vector<int> _v;
 
+    struct Iota {
+        int cur;
+        Iota(int start) : cur(start) {}
+        int operator()() { return cur++; }
+    };
+
   public:
     Span();
     Span(const Span &other);
@@ -21,13 +28,25 @@ class Span {
     ~Span();
 
     void addNumber(int value);
+    void addNumber(int from, int to);
+
     unsigned int shortestSpan();
     unsigned int longestSpan();
-
     void printVector();
-    void addNumber(int first, int last);
-    // template <typename InputIt> void addNumber(InputIt first, InputIt last);
+
+    template <typename Iter>
+
+    void addNumber(Iter first, Iter last);
 };
+
+template <typename Iter>
+
+void Span::addNumber(Iter first, Iter last) {
+    unsigned int cnt = static_cast<unsigned int>(std::distance(first, last));
+    if (_v.size() + cnt > _limit)
+        throw std::out_of_range("too many elements!!");
+    _v.insert(_v.end(), first, last);
+}
 
 #endif
 
