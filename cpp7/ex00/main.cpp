@@ -16,5 +16,12 @@ int main(void) {
     std::cout << "min( c, d ) = " << ::min(c, d) << std::endl;
     std::cout << "max( c, d ) = " << ::max(c, d) << std::endl;
 
+    int sameA = 3;
+    int sameB = 3;
+    ::swap(sameA, sameB);
+    std::cout << "sameA = " << &sameA << ", sameB = " << &sameB << std::endl;
+    std::cout << "min( a, b ) = " << &(::min(sameA, sameB)) << std::endl;
+    std::cout << "max( a, b ) = " << &(::max(sameA, sameB)) << std::endl;
+
     return 0;
 }

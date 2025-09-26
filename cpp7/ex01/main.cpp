@@ -2,15 +2,18 @@
 #include "iter.hpp"
 
 int main() {
-    // 1) non-const int array
     int intArr[] = {0, 1, 2, 3, 4};
-    std::cout << "=== intArr ===\n";
-    iter(intArr, 5, printElem);
+    std::cout << "=== Non-Const Array * Non-const func ===\n";
+    iter(intArr, 5, print_double<int>);
 
-    // 2) const std::string array
-    const std::string strArr[] = {"hello", "world", "iter", "test"};
-    std::cout << "\n=== const std::string array ===\n";
-    iter(strArr, 4, &printElem_const<const std::string>);
+    const std::string strArr[] = {"hello", "world", "iter", "test", "banana"};
+    std::cout << "\n=== Const Array * Const Array ===\n";
+    iter(strArr, 4, &print_const<const std::string>);
 
+    std::cout << "\n=== Non-Const Array * Const Array ===\n";
+    iter(intArr, 5, &print_const);
+
+    std::cout << "\n=== Non-Const Array * Const Array ===\n";
+    iter(strArr, 5, &print);
     return 0;
 }

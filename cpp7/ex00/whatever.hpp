@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include <string>
-#include <typeinfo>
 
 template <typename T>
 
@@ -26,7 +25,7 @@ const T &min(const T &a, const T &b) {
 template <typename T>
 
 const T &max(const T &a, const T &b) {
-    if (a > b)
+    if (b < a)
         return a;
     return b;
 }
