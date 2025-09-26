@@ -14,7 +14,7 @@ static void print_char(const char &c, const int &i) {
                   << "Non displayable"
                   << "\n";
     else
-        std::cout << "char:   " << c << "\n";
+        std::cout << "char:   \'" << c << "\'\n";
 }
 
 // fixed: Don’t use scientific. Always print in normal decimal.
@@ -30,14 +30,29 @@ void print_result(const char &c, const int &i, const float &f, const double &d) 
     // float: 7 significant digits
     {
         std::ostringstream oss;
-        oss << std::setprecision(7) << f; // no fixed!
-        std::cout << "float:  " << oss.str() << "f\n";
+        oss << std::setprecision(7) << f;
+        std::string s = oss.str();
+        if (s.find('.') != std::string::npos && s.find('e') == std::string::npos)
+            std::cout << "float:  " << oss.str() << "f\n";
+        else {
+            std::ostringstream oss2;
+            oss2 << std::fixed << std::setprecision(1) << f;
+            std::cout << "float:  " << oss2.str() << "f\n";
+        }
     }
 
     // double: 16 significant digits
     {
         std::ostringstream oss;
-        oss << std::setprecision(16) << d; // no fixed!
-        std::cout << "double: " << oss.str() << "\n";
+        oss << std::setprecision(16) << d;
+        std::string s = oss.str();
+
+        if (s.find('.') != std::string::npos && s.find('e') == std::string::npos) {
+            std::cout << "double: " << s << "\n";
+        } else {
+            std::ostringstream oss2;
+            oss2 << std::fixed << std::setprecision(1) << d;
+            std::cout << "double: " << oss2.str() << "\n";
+        }
     }
 }

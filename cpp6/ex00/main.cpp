@@ -58,8 +58,8 @@ void prepared_test() {
 
 int main(int argc, char **argv) {
     if (argc == 1)
-        std::cerr << "too less arguments\n";
-        // prepared_test();
+        // std::cerr << "too less arguments\n";
+        prepared_test();
     else if (argc == 2)
         ScalarConverter::convert(argv[1]);
     else

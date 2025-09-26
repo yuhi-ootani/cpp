@@ -19,11 +19,11 @@ Base *generate(void) {
 // On failure: returns nullptr.
 void identify(Base *p) {
     if (A *a = dynamic_cast<A *>(p))
-        std::cout << "It's a class A\n";
+        std::cout << "A\n";
     else if (B *b = dynamic_cast<B *>(p))
-        std::cout << "It's a class B\n";
+        std::cout << "B\n";
     else if (C *c = dynamic_cast<C *>(p))
-        std::cout << "It's a class C\n";
+        std::cout << "C\n";
     else
         std::cout << "It's not a Class ABC";
 }
@@ -35,7 +35,7 @@ void identify(Base &p) {
     try {
         A &a = dynamic_cast<A &>(p);
         (void)a;
-        std::cout << "It's a class A\n";
+        std::cout << "A\n";
         return;
     } catch (...) {
         ;
@@ -44,7 +44,7 @@ void identify(Base &p) {
     try {
         B &b = dynamic_cast<B &>(p);
         (void)b;
-        std::cout << "It's a class B\n";
+        std::cout << "B\n";
         return;
     } catch (...) {
         ;
@@ -53,7 +53,7 @@ void identify(Base &p) {
     try {
         C &c = dynamic_cast<C &>(p);
         (void)c;
-        std::cout << "It's a class C\n";
+        std::cout << "C\n";
         return;
     } catch (...) {
         ;

@@ -5,11 +5,11 @@ NAME      := identifier
 
 # Compiler settings
 CPP       := c++
-CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 
+CPPFLAGS  := -Wall -Wextra -Werror -std=c++98
 
 # Source and object files (explicit — no wildcards)
 SRCS      := main.cpp \
-			baseABC.cpp \
+			baseABC.cpp 
 
 
 
