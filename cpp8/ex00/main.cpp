@@ -10,15 +10,17 @@ int main() {
     int tmp[] = {1, 6, 4, 6, 0, 1, 4, 3, 0, 5, 7, 8};
     const std::size_t N = sizeof(tmp) / sizeof(tmp[0]);
     {
-        // ──  vector (success)
+        std::cout << "\n ──  vector (success)\n";
         std::vector<int> v(tmp, tmp + N);
-        std::vector<int>::const_iterator iter = easyfind(v, 4);
+        std::vector<int>::const_iterator iter1 = easyfind(v, 4);
 
-        // difference_type: the type used to say “how many steps” separate two iterators.
-        std::vector<int>::difference_type idx = iter - v.begin();
-        std::cout << "Vector: Target is " << *iter << " Idex number is " << idx << "\n";
+        std::vector<int>::const_iterator first = v.begin();
+        // std::vector<int>::difference_type idx = std::distance(first, iter);
 
-        // ──  vector (fail)
+        std::cout << "Vector: Target is " << *iter1 << " Index number is "
+                  << std::distance(first, iter1) << "\n";
+
+        std::cout << "\n ──  vector (fail)\n";
         try {
             std::vector<int>::const_iterator iter2 = easyfind(v, 42);
             std::cout << "Target is " << *iter2 << "\n";
@@ -28,16 +30,16 @@ int main() {
     }
 
     {
-        // ──  list (success)
+        std::cout << "\n ──  list (success)\n";
         std::list<int> v(tmp, tmp + N);
         std::list<int>::const_iterator iter1 = easyfind(v, 6);
 
         std::list<int>::const_iterator first = v.begin();
-        std::list<int>::difference_type idx = std::distance(first, iter1);
 
-        std::cout << "Target is " << *iter1 << " Idex number is " << idx << "\n";
+        std::cout << "Target is " << *iter1 << " Index number is " << std::distance(first, iter1)
+                  << "\n";
 
-        // ──  list (fail)
+        std::cout << "\n ──  list (fail)\n";
         try {
             std::list<int>::const_iterator iter2 = easyfind(v, 42);
             std::cout << "List: Target is " << *iter2 << "\n";
@@ -47,14 +49,14 @@ int main() {
     }
 
     {
-        // ──  deque (success)
+        std::cout << "\n ──  non-const deque (success)\n";
         std::deque<int> v(tmp, tmp + N);
-        std::deque<int>::const_iterator iter1 = easyfind(v, 0);
+        std::deque<int>::iterator iter1 = easyfind(v, 0);
 
-        std::deque<int>::difference_type idx = iter1 - v.begin();
-        std::cout << "Target is " << *iter1 << " Idex number is " << idx << "\n";
+        std::deque<int>::difference_type index = iter1 - v.begin();
+        std::cout << "Target is " << *iter1 << " Index number is " << index << "\n";
 
-        // ──  deque (fail)
+        std::cout << "\n ──  non-const deque (fail)\n";
         try {
             std::deque<int>::const_iterator iter2 = easyfind(v, 42);
             std::cout << "Deque: Target is " << *iter2 << "\n";

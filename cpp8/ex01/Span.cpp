@@ -2,15 +2,16 @@
 
 #include "Span.hpp"
 
-Span::Span() : _limit(0), _v() {
-    _v.reserve(10000);
+Span::Span() : _limit(2), _v() {
+    _v.reserve(2);
     std::cout << "default constructor called\n";
 }
 
-Span::Span(unsigned long N) : _limit(N), _v() {
-    if (N < 0 || N > static_cast<unsigned long>(std::numeric_limits<unsigned int>::max()))
+Span::Span(unsigned long N) : _limit(0), _v() {
+    const unsigned long UMAX = std::numeric_limits<unsigned int>::max();
+    if (N < 2 || N > UMAX)
         throw std::out_of_range("Span size out of valid range!!");
-    _v.reserve(_limit);
+    _limit = static_cast<unsigned int>(N);
     std::cout << "argument constructor called\n";
 }
 
@@ -39,9 +40,16 @@ void Span::addNumber(int from, int to) {
     if (from > to)
         std::swap(from, to);
 
-    unsigned int count = to - from + 1;
+    unsigned int ufrom = static_cast<unsigned int>(from);
+    unsigned int uto = static_cast<unsigned int>(to);
+    unsigned int count = uto - ufrom;
 
-    if (_v.size() + count > _limit)
+    if (count == std::numeric_limits<unsigned>::max())
+        throw std::out_of_range("range too large");
+
+    ++count;
+
+    if (count > _limit - static_cast<unsigned int>(_v.size()))
         throw std::out_of_range("too many elements!!");
 
     _v.reserve(_v.size() + count);
@@ -49,42 +57,45 @@ void Span::addNumber(int from, int to) {
     std::generate_n(std::back_inserter(_v), count, gen);
 }
 
-unsigned int Span::shortestSpan() {
-    if (_v.size() <= 1) {
-        throw std::length_error("too short span!!1");
+unsigned int Span::shortestSpan() const {
+    if (_v.size() < 2) {
+        throw std::length_error("too short span!!");
     }
     std::vector<int> tmp(_v.begin(), _v.end());
     std::sort(tmp.begin(), tmp.end());
 
-    unsigned int min = tmp[1] - tmp[0];
+    unsigned int min = std::numeric_limits<unsigned int>::max();
     unsigned int diff;
-
-    for (unsigned int i = 2, end = tmp.size(); i < end; i++) {
-        diff = tmp[i] - tmp[i - 1];
-        if (diff < min)
+    for (unsigned int i = 1; i < tmp.size(); ++i) {
+        diff = static_cast<unsigned int>(tmp[i]) - static_cast<unsigned int>(tmp[i - 1]);
+        if (diff < min) {
             min = diff;
+        }
     }
+
     return min;
 }
 
-unsigned int Span::longestSpan() {
+unsigned int Span::longestSpan() const {
 
-    if (_v.size() <= 1) {
+    if (_v.size() < 2) {
         throw std::length_error("too short span!!");
     }
 
-    std::vector<int> tmp(_v.begin(), _v.end());
-    unsigned int max;
-    std::sort(tmp.begin(), tmp.end());
-    max = static_cast<unsigned int>(tmp[tmp.size() - 1] - tmp[0]);
-    return max;
+    int low = *std::min_element(_v.begin(), _v.end());
+    int high = *std::max_element(_v.begin(), _v.end());
+
+    return static_cast<unsigned int>(high) - static_cast<unsigned int>(low);
 }
 
-void Span::printVector() {
-    for (unsigned int i = 0, end = _v.size(); i < end; i++) {
-        std::cout << _v[i] << ", ";
+void Span::printVector() const {
+    std::size_t i = 0;
+    for (std::vector<int>::const_iterator it = _v.begin(); it != _v.end(); ++it, ++i) {
+        std::cout << *it;
+        if (i + 1 < _v.size())
+            std::cout << ", ";
         if ((i + 1) % 10 == 0)
             std::cout << "\n";
     }
-    std::cout << std::endl;
+    std::cout << '\n';
 }

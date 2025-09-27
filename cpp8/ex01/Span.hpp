@@ -2,7 +2,8 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
-#include <algorithm>
+#include <algorithm> //std::min_element std::max_element std::sort generate_n
+#include <climits>   // INT_MIN, INT_MAX
 #include <iostream>
 #include <iterator>
 #include <limits>
@@ -30,9 +31,9 @@ class Span {
     void addNumber(int value);
     void addNumber(int from, int to);
 
-    unsigned int shortestSpan();
-    unsigned int longestSpan();
-    void printVector();
+    unsigned int shortestSpan() const;
+    unsigned int longestSpan() const;
+    void printVector() const;
 
     template <typename Iter>
 
@@ -43,7 +44,8 @@ template <typename Iter>
 
 void Span::addNumber(Iter first, Iter last) {
     unsigned int cnt = static_cast<unsigned int>(std::distance(first, last));
-    if (_v.size() + cnt > _limit)
+    unsigned int cur = static_cast<unsigned int>(_v.size());
+    if (cnt > _limit - cur)
         throw std::out_of_range("too many elements!!");
     _v.insert(_v.end(), first, last);
 }
