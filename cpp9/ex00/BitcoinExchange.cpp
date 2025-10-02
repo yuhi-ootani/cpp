@@ -157,7 +157,10 @@ void BitcoinExchange::validateLine(const std::string line, std::string *date, fl
     return;
 }
 
-void printResult(const )
+void printResult(const std::string date, const int &value)  
+{
+    if()
+}
 
 void BitcoinExchange::execute(const char *filename) {
     std::ifstream file(filname);
