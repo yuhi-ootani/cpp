@@ -2,8 +2,11 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
+#include <climits>
+#include <cmath>
 #include <cstdlib>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <map>
 #include <sstream>
@@ -13,7 +16,6 @@
 class BitcoinExchange {
   private:
     std::map<std::string, double> _db;
-    void validateLine(const std::string line, std::string *date, float *value);
 
   public:
     BitcoinExchange();
@@ -23,9 +25,10 @@ class BitcoinExchange {
 
     bool validateDate(const std::string &date) const;
     bool validateValue(const std::string &valueStr, double *Value) const;
+    void validateLine(const std::string line, std::string *date, float *value);
     void execute(const char *filename);
-    void printResult(const std::string date, const int &value) const;
-    std::map<std::string, double>::const_iterator & findRate(const std::string date) const;
+    void printResult(const std::string &date, int value) const;
+    std::map<std::string, double>::const_iterator findRate(const std::string date) const;
 };
 
 #endif
