@@ -1,10 +1,15 @@
 
 #include "MutantStack.hpp"
 
+<<<<<<< HEAD
 template <typename T1, typename C1, typename T2, typename C2>
 
 void subject_test(MutantStack<T1, C1> &mstack, MutantStack<T2, C2> &sstack) {
     std::cout << "subject test" << std::endl;
+=======
+int main() {
+    MutantStack<int> mstack;
+>>>>>>> f50f495 (adfa)
     mstack.push(5);
     mstack.push(17);
     std::cout << mstack.top() << std::endl;
@@ -13,6 +18,7 @@ void subject_test(MutantStack<T1, C1> &mstack, MutantStack<T2, C2> &sstack) {
     mstack.push(3);
     mstack.push(5);
     mstack.push(737);
+<<<<<<< HEAD
     mstack.push(0);
 
     typename MutantStack<T1, C1>::iterator it = mstack.begin();
@@ -58,12 +64,19 @@ void list_test() {
     mstack.push_back(0);
     std::list<int>::iterator it = mstack.begin();
     std::list<int>::iterator ite = mstack.end();
+=======
+    //[...]
+    mstack.push(0);
+    MutantStack<int>::iterator it = mstack.begin();
+    MutantStack<int>::iterator ite = mstack.end();
+>>>>>>> f50f495 (adfa)
     ++it;
     --it;
     while (it != ite) {
         std::cout << *it << std::endl;
         ++it;
     }
+<<<<<<< HEAD
     std::stack<int, std::list<int>
 
                >
@@ -105,3 +118,8 @@ int main() {
     list_test();
     return 0;
 }
+=======
+    std::stack<int> s(mstack);
+    return 0;
+}
+>>>>>>> f50f495 (adfa)

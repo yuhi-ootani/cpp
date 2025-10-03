@@ -24,6 +24,8 @@ class BitcoinExchange {
     bool validateDate(const std::string &date) const;
     bool validateValue(const std::string &valueStr, double *Value) const;
     void execute(const char *filename);
+    void printResult(const std::string date, const int &value) const;
+    std::map<std::string, double>::const_iterator & findRate(const std::string date) const;
 };
 
 #endif

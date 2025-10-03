@@ -2,6 +2,7 @@
 #ifndef MUTANTSTACK_HPP
 #define MUTANTSTACK_HPP
 
+<<<<<<< HEAD
 #include <deque>
 #include <iostream>
 #include <list>
@@ -50,3 +51,16 @@ class MutantStack : public std::stack<T, Container> {
 };
 
 #endif
+=======
+#include <stack>
+
+class MutanStack: public std::stack<int>   {
+  public:
+    //  template <class T, class Container = std::deque<T> >
+    typedef std::stack<int>::container_type::iterator iterator;
+
+};
+
+
+#endif
+>>>>>>> f50f495 (adfa)

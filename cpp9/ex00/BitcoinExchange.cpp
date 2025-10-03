@@ -157,7 +157,19 @@ void BitcoinExchange::validateLine(const std::string line, std::string *date, fl
     return;
 }
 
-void printResult(const std::string date, const int &value)  
+std::map<std::string, double>::const_iterator & BitcoinExchange::findRate(const std::string date) const {
+    std::map<std::string, double>::const_iterator it = _db.find(date);
+    if (it != _db.end())
+        return it;
+
+    it = _db.lower_bound(date);
+    if (it == _db.begin())
+        return it;
+    --it;
+    return it;
+}
+
+void BitcoinExchange::printResult(const std::string date, const int &value) const
 {
     if()
 }
