@@ -1,11 +1,12 @@
 #ifndef RPN_HPP
 #define RPN_HPP
 
+#include <climits>
 #include <iostream>
-#include <stack>
-#include <string>
 #include <sstream>
+#include <stack>
 #include <stdexcept>
+#include <string>
 
 class RPN {
   private:
@@ -19,6 +20,9 @@ class RPN {
     ~RPN();
 
     bool validateStr(const std::string &formula) const;
+    void ReversePolishNotation(const std::string &formula);
+    int calculate(char ope);
+    void execute(const std::string &formula);
 };
 
 #endif

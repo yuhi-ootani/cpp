@@ -1,8 +1,8 @@
 
-NAME      := ex00
+NAME      := PmergeMe
 
 CPP       := c++
-CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 #-pedantic
+CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 -pedantic
 
 SRCS      := main.cpp 
 
