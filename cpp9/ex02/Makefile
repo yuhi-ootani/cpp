@@ -4,7 +4,8 @@ NAME      := PmergeMe
 CPP       := c++
 CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 -pedantic
 
-SRCS      := main.cpp 
+SRCS      := main.cpp \
+			 PmergeMe.cpp
 
 OBJS      := $(SRCS:.cpp=.o)
 
