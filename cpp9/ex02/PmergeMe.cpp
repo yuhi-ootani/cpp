@@ -38,9 +38,10 @@ PmergeMe::~PmergeMe() {}
 //     return begin + ui * block_size - 1;
 // }
 
+static inline void 
+
 static inline void split_main_pend(std::vector<int> &container, size_t block_size,
-                                   std::vector<std::vector<int>::iterator> &main,
-                                   std::vector<std::vector<int>::iterator> &pend) {
+                                   std::vector<vec_iter> &main, std::vector<vec_iter> &pend) {
 
     main.clear();
     pend.clear();
@@ -72,70 +73,66 @@ static inline void split_main_pend(std::vector<int> &container, size_t block_siz
     }
 }
 
-static void merge_insertion(std::vector<std::vector<int>::iterator> &main,
-                            std::vector<std::vector<int>::iterator> &pend) {
-    if (pend.empty())
-        return;
+static void merge_insertion(std::vector<vec_iter> &main, std::vector<vec_iter> &pend) {
 
     int pre_j = jacobsthal_number(1);
     int inserted_nbr = 0;
+    int seed_j = 2;
 
-    for (int seed_j = 2;; ++seed_j) {
+    while (!pend.empty()) {
 
         const int cur_j = jacobsthal_number(seed_j);
         int diff_j = cur_j - pre_j;
         if (diff_j <= 0) {
+            ++seed_j;
             pre_j = cur_j;
             continue;
         }
 
-        if (diff_j > static_cast<int>(pend.size())) {
-            break;
-        }
-
+        int pend_size = static_cast<int>(pend.size());
+        int insert_times = (diff_j < pend_size) ? diff_j : pend_size;
+        bool remain_round = (insert_times < diff_j);
         int fence_changed = 0;
 
-        for (int pend_i = diff_j - 1; pend_i >= 0; --pend_i) {
+        for (int pend_i = insert_times - 1; pend_i >= 0; --pend_i) {
             std::vector<int>::iterator pend_value = pend[pend_i];
 
-            int right_fence_index = cur_j + inserted_nbr - fence_changed;
+            int right_fence_index;
+            if (!remain_round)
+                right_fence_index = cur_j + inserted_nbr - fence_changed;
+            else
+                right_fence_index = static_cast<int>(main.size()) - static_cast<int>(pend.size()) +
+                                    pend_i + (is_odd ? 1 : 0);
+
             if (right_fence_index > static_cast<int>(main.size()))
                 right_fence_index = static_cast<int>(main.size());
 
-            std::vector<std::vector<int>::iterator>::iterator right_fence_iter =
-                main.begin() + right_fence_index;
+            std::vector<vec_iter>::iterator right_fence_iter = main.begin() + right_fence_index;
 
-            std::vector<std::vector<int>::iterator>::iterator insert_pos = std::upper_bound(
-                main.begin(), right_fence_iter, pend_value, comp_iter<std::vector<int>::iterator>);
+            std::vector<vec_iter>::iterator insert_pos =
+                std::upper_bound(main.begin(), right_fence_iter, pend_value, comp_iter<vec_iter>);
 
-            std::vector<std::vector<int>::iterator>::iterator inserted_iter =
-                main.insert(insert_pos, pend_value);
+            std::vector<vec_iter>::iterator inserted_iter = main.insert(insert_pos, pend_value);
 
             if (insert_pos == right_fence_iter) {
                 ++fence_changed;
             }
         }
 
-        pend.erase(pend.begin(), pend.begin() + diff_j);
+        pend.erase(pend.begin(), pend.begin() + insert_times);
 
-        pre_j = cur_j;
-        inserted_nbr += diff_j;
-
-        if (pend.empty())
-            return;
-    }
-
-    for (std::vector<std::vector<int>::iterator>::reverse_iterator rit = pend.rbegin();
-         rit != pend.rend(); ++rit) {
-
-            std::vector< std::vector<int>::iterator >::iterator insert_pos = std::upper_bound(main.begin(), main.end(), *rit, )
+        if (!remain_round) {
+            pre_j = cur_j;
+            inserted_nbr += insert_times;
+            ++seed_j;
+        }
     }
 }
 
 void PmergeMe::sortVec() {
     size_t block_size = biggest_block_sort(_vec);
-    std::vector<std::vector<int>::iterator> main;
-    std::vector<std::vector<int>::iterator> pend;
+    std::vector<vec_iter> main;
+    std::vector<vec_iter> pend;
 
     for (; block_size > 1; block_size /= 2) {
         split_main_pend(_vec, block_size, main, pend);

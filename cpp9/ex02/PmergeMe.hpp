@@ -12,6 +12,15 @@
 #include <string>
 #include <vector>
 
+typedef std::vector<int>::iterator vec_iter;
+typedef std::deque<int>::iterator deq_iter;
+
+typedef struct s_info {
+    size_t block_size;
+    size_t blocks_nbr;
+    bool is_odd;
+} t_info;
+
 class PmergeMe {
   private:
     std::vector<int> _vec;
