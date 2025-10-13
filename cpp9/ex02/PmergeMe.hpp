@@ -2,6 +2,7 @@
 #ifndef PMERGEME
 #define PMERGEME
 
+#include <algorithm>
 #include <cerrno>
 #include <climits>
 #include <cstdlib>
@@ -46,8 +47,8 @@ static inline size_t biggest_block_sort(Container &c) {
 
     size_t block_size = 1;
     for (; (block_size << 1) <= elements; block_size *= 2) {
-        size_t full_blocks = elements / block_size;
-        const size_t end_block = (full_blocks & 1) ? full_blocks - 1 : full_blocks;
+        size_t blocks_nbr = elements / block_size;
+        const size_t end_block = (blocks_nbr & 1) ? blocks_nbr - 1 : blocks_nbr;
 
         for (size_t cur_block = 0; cur_block + 1 < end_block; cur_block += 2) {
             size_t L = cur_block * block_size;
@@ -57,4 +58,10 @@ static inline size_t biggest_block_sort(Container &c) {
         }
     }
     return block_size;
+}
+
+template <typename Iter>
+
+bool comp_iter(Iter a, Iter b) {
+    return *a < *b;
 }

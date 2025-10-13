@@ -184,7 +184,7 @@ BitcoinExchange::findRate(const std::string date) const {
 void BitcoinExchange::printResult(const std::string &date, int value) const {
     std::map<std::string, double>::const_iterator rateIt = findRate(date);
     double result = rateIt->second * value;
-    if (result > INT_MAX) {
+    if (result > std::numeric_limits<int>::max()) {
         std::cout << date << " => " << value << " = TOO BIG NUMBER" << std::endl;
     } else if (std::fmod(result, 1.0) != 0.0) {
         std::ostringstream oss;

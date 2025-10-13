@@ -2,7 +2,7 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
-#include <climits>
+#include <limits>
 #include <cmath>
 #include <cstdlib>
 #include <fstream>

@@ -53,36 +53,57 @@ bool RPN::validateStr(const std::string &formula) const {
 }
 
 int RPN::calculate(char ope) {
+    if (_stack.size() < 2)
+        throw std::runtime_error("stack underflow");
+
     int right = _stack.top();
     _stack.pop();
     int left = _stack.top();
     _stack.pop();
 
-    int res;
+    const int IMAX = std::numeric_limits<int>::max();
+    const int IMIN = std::numeric_limits<int>::min();
+
+    int res = 0;
     switch (ope) {
-    case '+':
-        if ((right > 0 && left > INT_MAX - right) || (right < 0 && left < INT_MIN - right)) {
+    case '+': {
+        long tmp = static_cast<long>(left) + static_cast<long>(right);
+        if (tmp > IMAX || tmp < IMIN) {
             throw std::overflow_error("integer overflow on addition");
+            std::cerr << left << " + " << right << " = " << tmp << std::endl;
         }
-        res = left + right;
+        res = static_cast<int>(tmp);
         break;
-    case '-':
-        if ((right < 0 && left > INT_MAX + right) || (right > 0 && left < INT_MIN + right)) {
+    }
+    case '-': {
+        long tmp = static_cast<long>(left) - static_cast<long>(right);
+        if (tmp > IMAX || tmp < IMIN) {
+            std::cerr << left << " - " << right << " = " << tmp << std::endl;
             throw std::overflow_error("integer overflow on subtraction");
         }
-        res = left - right;
+        res = static_cast<int>(tmp);
         break;
-    case '*':
-        if (right != 0 && (left > INT_MAX / right || left < INT_MIN / right)) {
+    }
+    case '*': {
+        long tmp = static_cast<long>(left) * static_cast<long>(right);
+        if (tmp > IMAX || tmp < IMIN) {
+            std::cerr << left << " * " << right << " = " << tmp << std::endl;
             throw std::overflow_error("integer overflow on multiplication");
         }
-        res = left * right;
+        res = static_cast<int>(tmp);
         break;
-    case '/':
+    }
+    case '/': {
         if (right == 0)
             throw std::out_of_range("division by zero");
+        long tmp = static_cast<long>(left) * static_cast<long>(right);
+        if (left == IMIN && right == -1) {
+            std::cerr << left << " / " << right << " = " << tmp << std::endl;
+            throw std::overflow_error("integer overflow on division");
+        }
         res = left / right;
         break;
+    }
     default:
         throw std::runtime_error("unknown operator");
     }
