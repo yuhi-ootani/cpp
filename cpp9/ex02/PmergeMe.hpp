@@ -6,6 +6,7 @@
 #include <cerrno>
 #include <climits>
 #include <cstdlib>
+#include <cstring>
 #include <deque>
 #include <iostream>
 #include <set>
@@ -15,11 +16,11 @@
 typedef std::vector<int>::iterator vec_iter;
 typedef std::deque<int>::iterator deq_iter;
 
-typedef struct s_info {
-    size_t block_size;
-    size_t blocks_nbr;
+typedef struct s_block {
+    size_t each_size;
+    size_t total_nbr;
     bool is_odd;
-} t_info;
+} t_block;
 
 class PmergeMe {
   private:
@@ -35,9 +36,19 @@ class PmergeMe {
 
     void sortVec();
     void sortDeque();
+    const std::vector<int> &getVec() const;
+    const std::deque<int> &getDeque() const;
 };
 
 #endif
+
+template <typename Container>
+static inline void get_block_info(size_t block_size, t_block &block, const Container &container) {
+
+    block.each_size = block_size;
+    block.total_nbr = container.size() / block_size;
+    block.is_odd = (total & 1u) != 0;
+}
 
 template <typename Container>
 
@@ -69,8 +80,70 @@ static inline size_t biggest_block_sort(Container &c) {
     return block_size;
 }
 
+template <typename Container>
+
+void print_container(const Container &c) {
+    std::cout << "After: ";
+
+    for (typename Container::const_iterator it = c.begin(); it != c.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
+
 template <typename Iter>
 
 bool comp_iter(Iter a, Iter b) {
     return *a < *b;
+}
+
+template <typename Holder>
+
+static void merge_insertion(Holder &main, Holder &pend, const t_block &block) {
+
+    typedef typename Holder::value_type DataIter; // container's data type
+    typedef typename Holder::iterator HolderIter; // holder's iterator
+
+    int pre_j = jacobsthal_number(2);
+    int inserted_nbr = 0;
+
+    for (int seed_j = 3; !pend.empty(); ++seed_j) {
+
+        const int cur_j = jacobsthal_number(seed_j);
+        const int diff_j = cur_j - pre_j;
+        int insert_times = std::min(diff_j, static_cast<int>(pend.size()));
+        int fence_changed = 0;
+
+        for (int pend_i = insert_times - 1; pend_i >= 0; --pend_i) {
+            DataIter pend_value = pend[pend_i];
+
+            int fence_index;
+
+            int main_size = static_cast<int>(main.size());
+            if (insert_times == diff_j)
+                fence_index = cur_j + inserted_nbr - fence_changed;
+            else
+                fence_index =
+                    main_size - static_cast<int>(pend.size()) + pend_i + (block.is_odd ? 1 : 0);
+
+            if (fence_index > main_size)
+                fence_index = main_size;
+
+            HolderIter fence_iter = main.begin() + fence_index;
+
+            HolderIter insert_pos =
+                std::upper_bound(main.begin(), fence_iter, pend_value, comp_iter<DataIter>);
+
+            HolderIter inserted_iter = main.insert(insert_pos, pend_value);
+
+            const int inserted_idx = static_cast<int>(inserted_iter - main.begin());
+            if (inserted_idx == fence_index) {
+                ++fence_changed;
+            }
+        }
+
+        pend.erase(pend.begin(), pend.begin() + insert_times);
+        pre_j = cur_j;
+        inserted_nbr += insert_times;
+    }
 }

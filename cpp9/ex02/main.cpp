@@ -59,5 +59,7 @@ int main(int argc, char **argv) {
     }
 
     PmergeMe Ford(before);
+    Ford.sortVec();
+    print_container(Ford.getVec());
+    return 0;
 }
-

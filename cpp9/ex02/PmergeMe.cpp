@@ -38,105 +38,88 @@ PmergeMe::~PmergeMe() {}
 //     return begin + ui * block_size - 1;
 // }
 
-static inline void 
-
-static inline void split_main_pend(std::vector<int> &container, size_t block_size,
-                                   std::vector<vec_iter> &main, std::vector<vec_iter> &pend) {
+static inline void split_main_pend(std::vector<int> &container, std::vector<vec_iter> &main,
+                                   std::vector<vec_iter> &pend, const t_block &bl) {
 
     main.clear();
     pend.clear();
 
-    if (block_size == 0)
+    if (bl.each_size <= 0 || bl.total_nbr < 2)
         return;
-
-    const size_t blocks_nbr = container.size() / block_size;
-    if (blocks_nbr < 2)
-        return;
-
-    const bool is_odd = (blocks_nbr & 1);
 
     const std::vector<int>::iterator begin = container.begin();
 
-    main.reserve(blocks_nbr);
-    pend.reserve(blocks_nbr / 2 + (is_odd ? 1 : 0));
+    main.reserve(bl.total_nbr);
+    pend.reserve(bl.total_nbr / 2 + (bl.is_odd ? 1 : 0));
 
-    main.push_back(begin + (1 * block_size) - 1); // loser1 (b1)
-    main.push_back(begin + (2 * block_size) - 1); // winner1 (a1)
+    main.push_back(begin + (1 * bl.each_size) - 1); // loser1 (b1)
+    main.push_back(begin + (2 * bl.each_size) - 1); // winner1 (a1)
 
-    for (size_t i = 3; i + 1 <= blocks_nbr; i += 2) {
-        pend.push_back(begin + (i * block_size - 1));
-        main.push_back(begin + ((i + 1) * block_size - 1));
+    for (size_t i = 3; i + 1 <= bl.total_nbr; i += 2) {
+        pend.push_back(begin + (i * bl.each_size - 1));
+        main.push_back(begin + ((i + 1) * bl.each_size - 1));
     }
 
-    if (is_odd) {
-        pend.push_back(begin + (blocks_nbr * block_size - 1));
+    if (bl.is_odd) {
+        pend.push_back(begin + (bl.total_nbr * bl.each_size - 1));
     }
 }
 
-static void merge_insertion(std::vector<vec_iter> &main, std::vector<vec_iter> &pend) {
+static void swap_container_vector(std::vector<int> &vec, const std::vector<vec_iter> &main,
+                                  int block_size) {
+    if (main.empty() || block_size <= 0)
+        return;
 
-    int pre_j = jacobsthal_number(1);
-    int inserted_nbr = 0;
-    int seed_j = 2;
+    const size_t total = main.size() * block_size;
+    std::vector<int> tmp(total); // diff
 
-    while (!pend.empty()) {
+    size_t tmp_i = 0;
+    for (std::vector<vec_iter>::const_iterator it = main.begin(); it != main.end(); ++it) {
+        vec_iter head = *it;
+        vec_iter start = head - (block_size - 1);
 
-        const int cur_j = jacobsthal_number(seed_j);
-        int diff_j = cur_j - pre_j;
-        if (diff_j <= 0) {
-            ++seed_j;
-            pre_j = cur_j;
-            continue;
-        }
-
-        int pend_size = static_cast<int>(pend.size());
-        int insert_times = (diff_j < pend_size) ? diff_j : pend_size;
-        bool remain_round = (insert_times < diff_j);
-        int fence_changed = 0;
-
-        for (int pend_i = insert_times - 1; pend_i >= 0; --pend_i) {
-            std::vector<int>::iterator pend_value = pend[pend_i];
-
-            int right_fence_index;
-            if (!remain_round)
-                right_fence_index = cur_j + inserted_nbr - fence_changed;
-            else
-                right_fence_index = static_cast<int>(main.size()) - static_cast<int>(pend.size()) +
-                                    pend_i + (is_odd ? 1 : 0);
-
-            if (right_fence_index > static_cast<int>(main.size()))
-                right_fence_index = static_cast<int>(main.size());
-
-            std::vector<vec_iter>::iterator right_fence_iter = main.begin() + right_fence_index;
-
-            std::vector<vec_iter>::iterator insert_pos =
-                std::upper_bound(main.begin(), right_fence_iter, pend_value, comp_iter<vec_iter>);
-
-            std::vector<vec_iter>::iterator inserted_iter = main.insert(insert_pos, pend_value);
-
-            if (insert_pos == right_fence_iter) {
-                ++fence_changed;
-            }
-        }
-
-        pend.erase(pend.begin(), pend.begin() + insert_times);
-
-        if (!remain_round) {
-            pre_j = cur_j;
-            inserted_nbr += insert_times;
-            ++seed_j;
-        }
+        std::memcpy(&tmp[tmp_i], &*start, block_size * sizeof(int)); // diff
+        tmp_i += block_size;
     }
+
+    std::memcpy(&vec[0], &tmp[0], total * sizeof(int)); // diff
 }
 
 void PmergeMe::sortVec() {
     size_t block_size = biggest_block_sort(_vec);
+
     std::vector<vec_iter> main;
     std::vector<vec_iter> pend;
-
-    for (; block_size > 1; block_size /= 2) {
-        split_main_pend(_vec, block_size, main, pend);
-        merge_insertion(main, pend);
-        swap_container(_vec, main);
+    for (; block_size >= 1; block_size /= 2) {
+        t_block block;
+        get_block_info(block_size, block, _vec);
+        split_main_pend(_vec, main, pend, block);
+        merge_insertion(main, pend, block);
+        swap_container_vector(_vec, main, block_size);
     }
 }
+
+static void swap_container_deque(std::deque<int> &deque, const std::deque<deq_iter> &main,
+                                 int block_size) {
+    if (main.empty() || block_size <= 0)
+        return;
+
+    const size_t total = main.size() * block_size;
+    std::deque<int> tmp;
+    tmp.resize(total); // diff
+
+    size_t tmp_i = 0;
+    deq_iter tmp_it = tmp.begin();
+    for (std::deque<deq_iter>::const_iterator it = main.begin(); it != main.end(); ++it) {
+        deq_iter head = *it;
+        deq_iter start = head - (block_size - 1);
+
+        std::copy(start, start + block_size, tmp.begin() + tmp_i); // diff
+        tmp_i += block_size;
+    }
+
+    std::copy(tmp.begin(), tmp.end(), deque.begin()); // diff
+}
+
+const std::vector<int> &PmergeMe::getVec() const { return _vec; }
+const std::deque<int> &PmergeMe::getDeque() const { return _deque; }
