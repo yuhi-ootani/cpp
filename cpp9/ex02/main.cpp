@@ -61,5 +61,8 @@ int main(int argc, char **argv) {
     PmergeMe Ford(before);
     Ford.sortVec();
     print_container(Ford.getVec());
+
+    Ford.sortDeque();
+    print_container(Ford.getDeque());
     return 0;
 }

@@ -40,18 +40,20 @@ class PmergeMe {
     const std::deque<int> &getDeque() const;
 };
 
-#endif
+long jacobsthal_number(long n);
 
-template <typename Container>
-static inline void get_block_info(size_t block_size, t_block &block, const Container &container) {
+template <typename Container, typename Holder>
+static inline void setup_block(size_t block_size, t_block &block, const Container &container,
+                               Holder &main, Holder &pend) {
 
     block.each_size = block_size;
     block.total_nbr = container.size() / block_size;
-    block.is_odd = (total & 1u) != 0;
+    block.is_odd = (block.total_nbr & 1) != 0;
+    main.clear();
+    pend.clear();
 }
 
 template <typename Container>
-
 // L 1 2 M 4 5 R;
 static inline void swap_bigger_block(Container &c, size_t L, size_t M, size_t R) {
     if (c[R - 1] < c[M - 1])
@@ -80,15 +82,26 @@ static inline size_t biggest_block_sort(Container &c) {
     return block_size;
 }
 
-template <typename Container>
+template <typename Container, typename Holder>
+static inline void split_main_pend(Container &container, Holder &main, Holder &pend,
+                                   const t_block &bl) {
 
-void print_container(const Container &c) {
-    std::cout << "After: ";
+    if (bl.each_size <= 0 || bl.total_nbr < 2)
+        return;
 
-    for (typename Container::const_iterator it = c.begin(); it != c.end(); ++it) {
-        std::cout << *it << " ";
+    typename Container::iterator begin = container.begin();
+
+    main.push_back(begin + (1 * bl.each_size) - 1); // loser1 (b1)
+    main.push_back(begin + (2 * bl.each_size) - 1); // winner1 (a1)
+
+    for (size_t i = 3; i + 1 <= bl.total_nbr; i += 2) {
+        pend.push_back(begin + (i * bl.each_size - 1));
+        main.push_back(begin + ((i + 1) * bl.each_size - 1));
     }
-    std::cout << std::endl;
+
+    if (bl.is_odd) {
+        pend.push_back(begin + (bl.total_nbr * bl.each_size - 1));
+    }
 }
 
 template <typename Iter>
@@ -147,3 +160,16 @@ static void merge_insertion(Holder &main, Holder &pend, const t_block &block) {
         inserted_nbr += insert_times;
     }
 }
+
+template <typename Container>
+
+void print_container(const Container &c) {
+    std::cout << "After: ";
+
+    for (typename Container::const_iterator it = c.begin(); it != c.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
+
+#endif
