@@ -5,12 +5,15 @@
 #include <algorithm>
 #include <cerrno>
 #include <climits>
-#include <cstdlib>
 #include <cstring>
 #include <deque>
 #include <iostream>
+#include <limits>
 #include <set>
+#include <sstream>
+#include <stdexcept>
 #include <string>
+#include <sys/time.h>
 #include <vector>
 
 typedef std::vector<int>::iterator vec_iter;
@@ -164,7 +167,6 @@ static void merge_insertion(Holder &main, Holder &pend, const t_block &block) {
 template <typename Container>
 
 void print_container(const Container &c) {
-    std::cout << "After: ";
 
     for (typename Container::const_iterator it = c.begin(); it != c.end(); ++it) {
         std::cout << *it << " ";

@@ -2,12 +2,12 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
-#include <limits>
 #include <cmath>
 #include <cstdlib>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <map>
 #include <sstream>
 #include <stdexcept>
@@ -27,7 +27,7 @@ class BitcoinExchange {
     bool validateValue(const std::string &valueStr, double *Value) const;
     void validateLine(const std::string line, std::string *date, float *value);
     void execute(const char *filename);
-    void printResult(const std::string &date, int value) const;
+    void printResult(const std::string &date, float value) const;
     std::map<std::string, double>::const_iterator findRate(const std::string date) const;
 };
 
