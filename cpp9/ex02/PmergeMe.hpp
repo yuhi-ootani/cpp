@@ -16,6 +16,8 @@
 #include <sys/time.h>
 #include <vector>
 
+// extern long global_count;
+
 typedef std::vector<int>::iterator vec_iter;
 typedef std::deque<int>::iterator deq_iter;
 
@@ -59,8 +61,10 @@ static inline void setup_block(size_t block_size, t_block &block, const Containe
 template <typename Container>
 // L 1 2 M 4 5 R;
 static inline void swap_bigger_block(Container &c, size_t L, size_t M, size_t R) {
-    if (c[R - 1] < c[M - 1])
+    if (c[R - 1] < c[M - 1]) {
         std::rotate(c.begin() + L, c.begin() + M, c.begin() + R);
+        // global_count++;
+    }
 }
 
 template <typename Container>
@@ -110,6 +114,7 @@ static inline void split_main_pend(Container &container, Holder &main, Holder &p
 template <typename Iter>
 
 bool comp_iter(Iter a, Iter b) {
+    // global_count++;
     return *a < *b;
 }
 

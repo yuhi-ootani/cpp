@@ -1,6 +1,8 @@
 
 #include "PmergeMe.hpp"
 
+// long global_count = 0;
+
 static int parse_positive_int_strict(const char *str) {
     if (!str || !*str)
         throw std::invalid_argument("empty argument");
@@ -82,8 +84,8 @@ static void print_result(std::vector<int> &before, PmergeMe &Ford, double vec_us
 }
 
 int main(int argc, char **argv) {
-    if (argc < 2 || argc > 3001) {
-        std::cerr << "Error: The number of arguments must be between 1 and 3000.\n";
+    if (argc < 2) {
+        std::cerr << "Error: The number of arguments must be more than 2\n";
         return 1;
     }
 

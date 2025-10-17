@@ -3,6 +3,7 @@
 
 // https://k144.github.io/tools/rpn/
 
+#include <cstdlib>
 #include <iostream>
 #include <limits>
 #include <sstream>

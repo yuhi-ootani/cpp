@@ -114,7 +114,7 @@ void RPN::ReversePolishNotation(const std::string &formula) {
     std::istringstream iss(formula);
     std::string token;
 
-    int res;
+    int res = std::atoi(formula.c_str());
 
     while (iss >> token) {
         unsigned char c = static_cast<unsigned char>(token[0]);

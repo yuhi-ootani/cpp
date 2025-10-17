@@ -2,7 +2,7 @@
 NAME      := PmergeMe
 
 CPP       := c++
-CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 -g -pedantic
+CPPFLAGS  := -Wall -Wextra -Werror -std=c++98 -pedantic
 
 SRCS      := main.cpp \
 			 PmergeMe.cpp

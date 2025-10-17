@@ -66,6 +66,7 @@ static void swap_container_vector(std::vector<int> &vec, const std::vector<vec_i
 }
 
 void PmergeMe::sortVec() {
+    // global_count = 0;
     size_t block_size = biggest_block_sort(_vec);
 
     std::vector<vec_iter> main;
@@ -81,6 +82,7 @@ void PmergeMe::sortVec() {
         merge_insertion(main, pend, block);
         swap_container_vector(_vec, main, block_size);
     }
+    // std::cout << "Vector Comparision times : " << global_count << "\n";
 }
 
 //////////////////////////////////////////////
@@ -109,6 +111,7 @@ static void swap_container_deque(std::deque<int> &deque, const std::deque<deq_it
 }
 
 void PmergeMe::sortDeque() {
+    // global_count = 0;
     size_t block_size = biggest_block_sort(_deque);
 
     std::deque<deq_iter> main;
@@ -120,6 +123,7 @@ void PmergeMe::sortDeque() {
         merge_insertion(main, pend, block);
         swap_container_deque(_deque, main, block_size);
     }
+    // std::cout << "Deque  Comparision times : " << global_count << "\n";
 }
 
 ///////////////////////////////////////////
