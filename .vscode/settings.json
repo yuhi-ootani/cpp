@@ -87,6 +87,7 @@
     "list": "cpp",
     "map": "cpp",
     "set": "cpp",
-    "climits": "cpp"
+    "climits": "cpp",
+    "cerrno": "cpp"
   }
 }
